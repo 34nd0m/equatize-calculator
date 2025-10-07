@@ -343,9 +343,9 @@ export default function Calculator() {
   const [royalty, setRoyalty] = useState(0.06);
   const [ebitdaMargin, setEbitdaMargin] = useState(0.18);
   const [multiple, setMultiple] = useState(4.5);
-  const [unlockPct, setUnlockPct] = useState(0.7);
+  const [unlockPct, setUnlockPct] = useState(0.6);
   const [discountPct, setDiscountPct] = useState(0.15);
-  const [brokerCommissionPct, setBrokerCommissionPct] = useState(0.08);
+  const [brokerCommissionPct, setBrokerCommissionPct] = useState(0.12);
   const [legalProfessionalPct, setLegalProfessionalPct] = useState(0.02);
   const [accountingTaxPct, setAccountingTaxPct] = useState(0.01);
   const [dueDiligencePct, setDueDiligencePct] = useState(0.01);
@@ -557,7 +557,7 @@ export default function Calculator() {
           <CardContent className="p-6 space-y-4">
             <h2 className="text-xl font-semibold text-[#5f58ff] tracking-tight">Per-Unit Snapshot</h2>
             <div className="rounded-xl border p-4 space-y-2">
-              <div className="font-semibold">Conventional sale</div>
+              <div className="font-semibold">Conventional sale (via Broker)</div>
               <div className="flex justify-between text-sm"><span className="text-muted-foreground">Sector resale multiple</span><span className="font-medium">{perUnit.sectorMultiple.toFixed(2)}×</span></div>
               <div className="flex justify-between text-sm"><span className="text-muted-foreground">Sale price (before costs)</span><span className="font-medium">{currency(perUnit.brokerSaleValue, ccy)}</span></div>
               <div className="flex justify-between text-sm"><span className="text-muted-foreground">Total costs</span><span className="font-medium">{pct(
@@ -567,7 +567,7 @@ export default function Calculator() {
                 dueDiligencePct +
                 frictionPremiumPct
               )}</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Net to franchisee</span><span className="font-semibold">{currency(perUnit.traditionalNet, ccy)}</span></div>
+              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Net Exit Value</span><span className="font-semibold">{currency(perUnit.traditionalNet, ccy)}</span></div>
             </div>
             <div className="rounded-xl border p-4 space-y-2">
               <div className="font-semibold">Capital value release (via Equatize)</div>
