@@ -567,15 +567,15 @@ export default function Calculator() {
                 dueDiligencePct +
                 frictionPremiumPct
               )}</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Net Exit Value</span><span className="font-semibold">{currency(perUnit.traditionalNet, ccy)}</span></div>
+              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Net exit value</span><span className="font-semibold">{currency(perUnit.traditionalNet, ccy)}</span></div>
             </div>
             <div className="rounded-xl border p-4 space-y-2">
-              <div className="font-semibold">Capital value release (via Equatize)</div>
+              <div className="font-semibold">Unlock capital value (via Equatize)</div>
               <div className="flex justify-between text-sm"><span className="text-muted-foreground">EV / unit</span><span className="font-medium">{currency(perUnit.enterpriseValue, ccy)}</span></div>
               <div className="flex justify-between text-sm"><span className="text-muted-foreground">Accessible capital value</span><span className="font-medium">{pct(unlockPct)}</span></div>
               <div className="flex justify-between text-sm"><span className="text-muted-foreground">Gross unlock</span><span className="font-medium">{currency(perUnit.grossUnlock, ccy)}</span></div>
               <div className="flex justify-between text-sm"><span className="text-muted-foreground">Participation discount</span><span className="font-medium">{pct(discountPct)}</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Net unlock</span><span className="font-semibold">{currency(perUnit.netUnlock, ccy)}</span></div>
+              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Net capital value</span><span className="font-semibold">{currency(perUnit.netUnlock, ccy)}</span></div>
             </div>
             <div className="rounded-xl bg-muted/50 p-3 mt-1 flex items-center justify-between">
               <div className="text-sm text-muted-foreground">Conventional vs Equatize Margin (per unit)</div>
