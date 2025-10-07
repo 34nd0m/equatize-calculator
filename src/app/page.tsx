@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { Card, CardContent } from "../components/ui/card";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Slider } from "../components/ui/slider";
-import { Popover, PopoverTrigger, PopoverContent } from "../components/ui/popover";
-import { Switch } from "../components/ui/switch";
-import { Button } from "../components/ui/button";
+// import { Card, CardContent } from "../components/ui/card";
+// import { Input } from "../components/ui/input";
+// import { Label } from "../components/ui/label";
+// import { Slider } from "../components/ui/slider";
+// import { Popover, PopoverTrigger, PopoverContent } from "../components/ui/popover";
+// import { Switch } from "../components/ui/switch";
+// import { Button } from "../components/ui/button";
 import { Info } from "lucide-react";
 import { motion } from "framer-motion";
 import {
