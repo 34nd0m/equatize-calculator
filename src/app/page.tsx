@@ -1,13 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { Card, CardContent } from "../components/ui/card";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Slider } from "../components/ui/slider";
-import { Popover, PopoverTrigger, PopoverContent } from "../components/ui/popover";
-import { Switch } from "../components/ui/switch";
-import { Button } from "../components/ui/button";
+
 import { Info } from "lucide-react";
 import { motion } from "framer-motion";
 import {
@@ -20,6 +14,60 @@ import {
   Legend,
 } from "recharts";
 import "@fontsource/outfit";
+
+function Card({ className = "", ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={`border rounded-xl bg-white ${className}`} {...props} />;
+}
+function CardContent({ className = "", ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={`p-4 ${className}`} {...props} />;
+}
+const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
+  ({ className = "", ...props }, ref) => (
+    <input ref={ref} className={`w-full rounded-md border px-3 py-2 outline-none focus:ring-2 focus:ring-[#5f58ff] ${className}`} {...props} />
+  )
+);
+Input.displayName = "Input";
+function Label(props: React.LabelHTMLAttributes<HTMLLabelElement>) {
+  return <label {...props} />;
+}
+function Button({ className = "", variant, size, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: string; size?: string }) {
+  return <button className={`inline-flex items-center gap-2 rounded-md px-3 py-2 border hover:bg-gray-50 ${className}`} {...props} />;
+}
+function Switch({ checked, onCheckedChange }: { checked: boolean; onCheckedChange: (v: boolean)=>void }) {
+  return (
+    <label style={{display:'inline-flex',alignItems:'center',cursor:'pointer'}}>
+      <input type="checkbox" checked={checked} onChange={(e)=>onCheckedChange(e.target.checked)} style={{display:'none'}}/>
+      <span style={{width:40,height:22,borderRadius:999,background:checked?'#5f58ff':'#ddd',position:'relative',transition:'all .2s'}}>
+        <span style={{position:'absolute',top:3,left:checked?22:3,width:16,height:16,borderRadius:999,background:'#fff',boxShadow:'0 1px 3px rgba(0,0,0,.2)',transition:'all .2s'}} />
+      </span>
+    </label>
+  );
+}
+function Slider({ id, value, min=0, max=1, step=0.01, onValueChange }: { id?: string; value: number[]; min?: number; max?: number; step?: number; onValueChange: (vals:number[])=>void }) {
+  return (
+    <input id={id} type="range" min={min} max={max} step={step} value={value[0]} onChange={(e)=>onValueChange([parseFloat(e.target.value)])}
+      className="w-full accent-[#5f58ff]" />
+  );
+}
+const PopCtx = React.createContext<{open:boolean,setOpen:(b:boolean)=>void}|null>(null);
+function Popover({ children }: { children: React.ReactNode }) {
+  const [open,setOpen] = useState(false);
+  return <PopCtx.Provider value={{open,setOpen}}><div className="relative inline-block">{children}</div></PopCtx.Provider>;
+}
+function PopoverTrigger({ asChild = false, children }: { asChild?: boolean; children: React.ReactElement }) {
+  const ctx = React.useContext(PopCtx)!;
+  const onClick = () => ctx.setOpen(!ctx.open);
+  return React.cloneElement(children, { onClick });
+}
+function PopoverContent({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ctx = React.useContext(PopCtx)!;
+  if (!ctx.open) return null;
+  return (
+    <div className={`absolute z-50 mt-2 w-64 rounded-md border bg-white p-3 shadow ${className}`}>
+      {children}
+    </div>
+  );
+}
 
 const currency = (n: number, ccy = "$") =>
   ccy + new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(n);
