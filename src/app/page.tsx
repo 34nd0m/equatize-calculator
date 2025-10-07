@@ -607,7 +607,13 @@ export default function Calculator() {
                 <YAxis tickFormatter={(v) => shortCurrency(v, ccy)} width={60} />
                 <Tooltip formatter={(v: number) => currency(v as number, ccy)} />
                 <Legend />
-                <Bar dataKey="Unlock" />
+                <Bar
+                  dataKey="Unlock"
+                  fill="#5f58ff"
+                  stroke="#433fff"
+                  strokeWidth={1}
+                  radius={[6, 6, 0, 0]} // adds rounded top corners
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
