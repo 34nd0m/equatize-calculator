@@ -345,11 +345,11 @@ export default function Calculator() {
   const [multiple, setMultiple] = useState(4.5);
   const [unlockPct, setUnlockPct] = useState(0.6);
   const [discountPct, setDiscountPct] = useState(0.15);
-  const [brokerCommissionPct, setBrokerCommissionPct] = useState(0.12);
+  const [brokerCommissionPct, setBrokerCommissionPct] = useState(0.15);
   const [legalProfessionalPct, setLegalProfessionalPct] = useState(0.02);
   const [accountingTaxPct, setAccountingTaxPct] = useState(0.01);
   const [dueDiligencePct, setDueDiligencePct] = useState(0.01);
-  const [frictionPremiumPct, setFrictionPremiumPct] = useState(0.03);
+  const [frictionPremiumPct, setFrictionPremiumPct] = useState(0.05);
   const [unitsMulti, setUnitsMulti] = useState(5);
   const [unitsNetwork, setUnitsNetwork] = useState(150);
   const [ccy, setCcy] = useState("$");
@@ -472,7 +472,7 @@ export default function Calculator() {
                       </button>
                     </PopoverTrigger>
                     <PopoverContent className="w-72 text-xs">
-                      Choose a sector to auto-fill typical AUV, royalty %, pre-royalty EBITDA margin, and a midpoint EV/EBITDA multiple. These are illustrative presets; edit to match your brand.
+                      Choose a sector to auto-fill typical AUV, royalty %, pre-royalty EBITDA margin, and a midpoint EV / EBITDA multiple. These are illustrative presets; edit to match your brand.
                     </PopoverContent>
                   </Popover>
                 </div>
