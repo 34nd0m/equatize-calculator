@@ -648,11 +648,11 @@ export default function Calculator() {
             <div className="rounded-xl border-2 border-[#5f58ff]/40 bg-[#5f58ff]/5 p-4 space-y-2 shadow-sm">
               <div className="font-semibold text-[#5f58ff]">Capital value unlocked (via Equatize)</div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">EV / EBITDA multiple (Equatize)</span>
+                <span className="text-muted-foreground">EV / EBITDA multiple</span>
                 <span className="font-medium">{multiple.toFixed(2)}×</span>
               </div>              
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">EV / unit</span>
+                <span className="text-muted-foreground">EV - Unit) </span>
                 <span className="font-medium">{currency(perUnit.enterpriseValue, ccy)}</span>
               </div>
               <div className="flex justify-between text-sm">
