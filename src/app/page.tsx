@@ -510,18 +510,24 @@ export default function Calculator() {
                 </div>
                 <Switch checked={includeRoyaltyInMargin} onCheckedChange={setIncludeRoyaltyInMargin} />
               </div>
-              <div className="rounded-lg border">
+              <div
+                className={`rounded-lg border transition-colors ${
+                  showMultiple ? "border-gray-300 bg-gray-50" : "border-gray-200 bg-gray-100 hover:bg-gray-50"
+                }`}
+              >
                 <button
                   type="button"
                   onClick={() => setShowMultiple((s) => !s)}
                   className="w-full flex items-center justify-between px-3 py-2"
                 >
-                  <span className="text-sm font-medium">EV / EBITDA multiple (Equatize)</span>
+                  <span className="text-sm font-medium text-gray-600">
+                    EV / EBITDA multiple (Equatize)
+                  </span>
                   <motion.span
                     initial={false}
                     animate={{ rotate: showMultiple ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
-                    className="text-muted-foreground"
+                    className="text-gray-500"
                   >
                     <ChevronDown className="w-4 h-4" />
                   </motion.span>
@@ -533,7 +539,7 @@ export default function Calculator() {
                   transition={{ duration: 0.25 }}
                   style={{ overflow: "hidden" }}
                 >
-                  <div className="px-3 pb-3">
+                  <div className="px-3 pb-3 pt-2">
                     <NumberField
                       id="multiple"
                       label="Multiple"
