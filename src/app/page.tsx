@@ -562,8 +562,9 @@ export default function Calculator() {
             
             <div className="grid md:grid-cols-2 gap-6">
             {/* Conventional Sale */}
-            <div className="rounded-xl border p-4 space-y-2 bg-white">
-              <div className="font-semibold text-gray-800">Conventional sale (via broker)</div>
+            <div className="rounded-xl border p-4 space-y-3 bg-white">
+              <div className="font-semibold text-gray-800">Conventional sale</div>
+              
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Sector resale multiple</span>
                 <span className="font-medium">{perUnit.sectorMultiple.toFixed(2)}×</span>
@@ -585,8 +586,21 @@ export default function Calculator() {
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Net Value</span>
+                <span className="text-muted-foreground">Net to franchisee</span>
                 <span className="font-semibold">{currency(perUnit.traditionalNet, ccy)}</span>
+              </div>
+            
+              {/* Sector comps now integrated */}
+              <div className="pt-3 border-t border-gray-200">
+                <h4 className="text-sm font-semibold mb-2 text-[#5f58ff]">Sector comps</h4>
+                <div className="text-xs grid gap-1">
+                  {sectorPresets[sectorKey].comps.map((c, i) => (
+                    <div key={i} className="flex justify-between gap-3">
+                      <span className="text-muted-foreground">{c.source}</span>
+                      <span className="font-medium">{c.earningsMultipleRange}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           
