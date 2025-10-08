@@ -555,37 +555,82 @@ export default function Calculator() {
             </div>
           </CardContent>
         </Card>
-
+        
         <Card className="rounded-2xl shadow-sm">
           <CardContent className="p-6 space-y-4">
             <h2 className="text-xl font-semibold text-[#5f58ff] tracking-tight">Per-Unit Snapshot</h2>
-            <div className="rounded-xl border p-4 space-y-2">
-              <div className="font-semibold">Conventional sale (via Broker)</div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Sector resale multiple</span><span className="font-medium">{perUnit.sectorMultiple.toFixed(2)}×</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Sale price (before costs)</span><span className="font-medium">{currency(perUnit.brokerSaleValue, ccy)}</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Total costs</span><span className="font-medium">{pct(
-                brokerCommissionPct +
-                legalProfessionalPct +
-                accountingTaxPct +
-                dueDiligencePct +
-                frictionPremiumPct
-              )}</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Net exit value</span><span className="font-semibold">{currency(perUnit.traditionalNet, ccy)}</span></div>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+            {/* Conventional Sale */}
+            <div className="rounded-xl border p-4 space-y-2 bg-white">
+              <div className="font-semibold text-gray-800">Conventional sale</div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Sector resale multiple</span>
+                <span className="font-medium">{perUnit.sectorMultiple.toFixed(2)}×</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Sale price (before costs)</span>
+                <span className="font-medium">{currency(perUnit.brokerSaleValue, ccy)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Total costs</span>
+                <span className="font-medium">
+                  {pct(
+                    brokerCommissionPct +
+                    legalProfessionalPct +
+                    accountingTaxPct +
+                    dueDiligencePct +
+                    frictionPremiumPct
+                  )}
+                </span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Net to franchisee</span>
+                <span className="font-semibold">{currency(perUnit.traditionalNet, ccy)}</span>
+              </div>
             </div>
-            <div className="rounded-xl border p-4 space-y-2">
-              <div className="font-semibold">Unlock capital value (via Equatize)</div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">EV / unit</span><span className="font-medium">{currency(perUnit.enterpriseValue, ccy)}</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Accessible capital value</span><span className="font-medium">{pct(unlockPct)}</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Gross unlock</span><span className="font-medium">{currency(perUnit.grossUnlock, ccy)}</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Participation discount</span><span className="font-medium">{pct(discountPct)}</span></div>
-              <div className="flex justify-between text-sm"><span className="text-muted-foreground">Net capital value</span><span className="font-semibold">{currency(perUnit.netUnlock, ccy)}</span></div>
+          
+            {/* Equatize Capital Value Release */}
+            <div className="rounded-xl border-2 border-[#5f58ff]/40 bg-[#5f58ff]/5 p-4 space-y-2 shadow-sm">
+              <div className="font-semibold text-[#5f58ff]">Capital value release (via Equatize)</div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">EV / unit</span>
+                <span className="font-medium">{currency(perUnit.enterpriseValue, ccy)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Accessible capital value</span>
+                <span className="font-medium">{pct(unlockPct)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Gross unlock</span>
+                <span className="font-medium">{currency(perUnit.grossUnlock, ccy)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Participation discount</span>
+                <span className="font-medium">{pct(discountPct)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">Net unlock</span>
+                <span className="font-semibold text-[#5f58ff]">
+                  {currency(perUnit.netUnlock, ccy)}
+                </span>
+              </div>
             </div>
-            <div className="rounded-xl bg-muted/50 p-3 mt-1 flex items-center justify-between">
-              <div className="text-sm text-muted-foreground">Conventional vs Equatize Margin (per unit)</div>
-              <div className="text-base font-semibold">{currency(perUnit.diffEquatizeVsTraditional, ccy)}</div>
-            </div>
-            <div className="mt-4">
-              <h4 className="text-sm font-semibold mb-2">Sector comps</h4>
+          </div>
+              <div className="rounded-xl border-2 border-[#5f58ff]/40 bg-[#5f58ff]/10 p-3 mt-4 flex items-center justify-between shadow-sm">
+                <div className="text-sm font-medium text-[#5f58ff]">
+                  Conventional vs Equatize Margin (per unit)
+                </div>
+                <div
+                  className={`text-base font-semibold ${
+                    perUnit.diffEquatizeVsTraditional >= 0 ? "text-[#5f58ff]" : "text-red-500"
+                  }`}
+                >
+                  {currency(perUnit.diffEquatizeVsTraditional, ccy)}
+                </div>
+              </div>
+              <div className="mt-4">
+                <h4 className="text-sm font-semibold mb-2">Sector comps</h4>
               <div className="text-xs grid gap-1">
                 {sectorPresets[sectorKey].comps.map((c, i) => (
                   <div key={i} className="flex justify-between gap-3">
