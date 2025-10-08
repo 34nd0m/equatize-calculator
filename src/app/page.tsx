@@ -658,7 +658,7 @@ export default function Calculator() {
                 <span className="font-medium">{multiple.toFixed(2)}×</span>
               </div>              
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">EV - Unit) </span>
+                <span className="text-muted-foreground">Unit EV</span>
                 <span className="font-medium">{currency(perUnit.enterpriseValue, ccy)}</span>
               </div>
               <div className="flex justify-between text-sm">
