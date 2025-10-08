@@ -563,7 +563,7 @@ export default function Calculator() {
             <div className="grid md:grid-cols-2 gap-6">
             {/* Conventional Sale */}
             <div className="rounded-xl border p-4 space-y-3 bg-white">
-              <div className="font-semibold text-gray-800">Conventional sale</div>
+              <div className="font-semibold text-gray-800">Conventional sale (via Broker)</div>
               
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">Sector resale multiple</span>
@@ -586,7 +586,7 @@ export default function Calculator() {
                 </span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Net to franchisee</span>
+                <span className="text-muted-foreground">Net value to owner</span>
                 <span className="font-semibold">{currency(perUnit.traditionalNet, ccy)}</span>
               </div>
             
@@ -624,7 +624,7 @@ export default function Calculator() {
                 <span className="font-medium">{pct(discountPct)}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Net value</span>
+                <span className="text-muted-foreground">Net value to owner</span>
                 <span className="font-semibold text-[#5f58ff]">
                   {currency(perUnit.netUnlock, ccy)}
                 </span>
