@@ -454,7 +454,10 @@ export default function Calculator() {
         </motion.h1>
       </div>
       <p className="text-center text-muted-foreground max-w-3xl mx-auto">
-        Estimate how much capital value can be unlocked today while retaining ongoing income rights. Adjust the inputs to reflect your brand’s economics.
+        Estimate how much capital value can be unlocked today while retaining ongoing income rights. 
+        </br>
+        </br>
+        Adjust the inputs to reflect your brand’s economics.
       </p>
 
       <div className="space-y-6">
