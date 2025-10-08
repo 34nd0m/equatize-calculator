@@ -344,7 +344,7 @@ export default function Calculator() {
   const [ebitdaMargin, setEbitdaMargin] = useState(0.18);
   const [multiple, setMultiple] = useState(4.5);
   const [unlockPct, setUnlockPct] = useState(0.6);
-  const [discountPct, setDiscountPct] = useState(0.15);
+  const [discountPct, setDiscountPct] = useState(0.1);
   const [brokerCommissionPct, setBrokerCommissionPct] = useState(0.15);
   const [legalProfessionalPct, setLegalProfessionalPct] = useState(0.02);
   const [accountingTaxPct, setAccountingTaxPct] = useState(0.01);
