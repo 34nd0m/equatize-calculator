@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 
-import { Info } from "lucide-react";
+import { Info, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import {
   ResponsiveContainer,
@@ -354,6 +354,7 @@ export default function Calculator() {
   const [unitsNetwork, setUnitsNetwork] = useState(150);
   const [ccy, setCcy] = useState("$");
   const [includeRoyaltyInMargin, setIncludeRoyaltyInMargin] = useState(true);
+  const [showMultiple, setShowMultiple] = useState(false);
 
   function applySectorPreset(key: keyof typeof sectorPresets) {
     const p = sectorPresets[key];
@@ -509,53 +510,92 @@ export default function Calculator() {
                 </div>
                 <Switch checked={includeRoyaltyInMargin} onCheckedChange={setIncludeRoyaltyInMargin} />
               </div>
-              <NumberField id="multiple" label="EV / EBITDA multiple (Equatize)" value={multiple} onChange={setMultiple} step={0.1} suffix="Edit to your latest comps" help="Illustrative multiple reflecting a standardized, lower-risk instrument versus small-business resales." />
-            </div>
+              <div className="rounded-lg border">
+                <button
+                  type="button"
+                  onClick={() => setShowMultiple((s) => !s)}
+                  className="w-full flex items-center justify-between px-3 py-2"
+                >
+                  <span className="text-sm font-medium">EV / EBITDA multiple (Equatize)</span>
+                  <motion.span
+                    initial={false}
+                    animate={{ rotate: showMultiple ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-muted-foreground"
+                  >
+                    <ChevronDown className="w-4 h-4" />
+                  </motion.span>
+                </button>
+              
+                <motion.div
+                  initial={false}
+                  animate={showMultiple ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  style={{ overflow: "hidden" }}
+                >
+                  <div className="px-3 pb-3">
+                    <NumberField
+                      id="multiple"
+                      label="Multiple"
+                      value={multiple}
+                      onChange={setMultiple}
+                      step={0.1}
+                      suffix="Edit to your latest comps"
+                      help="Illustrative multiple reflecting a standardized, lower-risk instrument versus small-business resales."
+                    />
+                  </div>
+                </motion.div>
+              </div>
+              </div>
           </CardContent>
         </Card>
 
-        <Card className="rounded-2xl shadow-sm">
-          <CardContent className="p-6 space-y-5">
-            <h2 className="text-xl font-semibold text-[#5f58ff]">Capital Value Parameters</h2>
-            <div className="grid gap-4">
-              <PctSlider id="unlockPct" label="Accessible capital value" value={unlockPct} onChange={setUnlockPct} help="Portion of accessible capital value today while retaining ongoing income rights. Accessible capital value is capped at 70%." />
-              <PctSlider id="discountPct" label="Participation discount" value={discountPct} onChange={setDiscountPct} help="Conservative haircut for friction and risk. Net unlock = gross unlock × (1 - discount)." />
-              <div className="grid grid-cols-2 gap-4">
-                <NumberField id="unitsMulti" label="Multi-unit operator: units" value={unitsMulti} onChange={setUnitsMulti} step={1} help="How many locations a given operator owns. Used to scale per-unit values." />
-                <NumberField id="unitsNetwork" label="Brand network: units" value={unitsNetwork} onChange={setUnitsNetwork} step={1} help="Total active locations in the brand. Used to estimate network-level unlock." />
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Left: Traditional Exit Fees */}
+          <Card className="rounded-2xl shadow-sm">
+            <CardContent className="p-6 space-y-5">
+              <h2 className="text-xl font-semibold text-[#5f58ff]">Traditional Exit Fees</h2>
+              <div className="grid gap-4">
+                <PctSlider id="brokerCommissionPct" label="Broker commission" value={brokerCommissionPct} onChange={setBrokerCommissionPct} help="Typical percentage paid to a business broker on sale proceeds." />
+                <PctSlider id="legalProfessionalPct" label="Legal & professional fees" value={legalProfessionalPct} onChange={setLegalProfessionalPct} help="External counsel and other professional costs tied to the sale." />
+                <PctSlider id="accountingTaxPct" label="Accounting & tax advisory" value={accountingTaxPct} onChange={setAccountingTaxPct} help="Preparation, quality-of-earnings, and tax structuring support." />
+                <PctSlider id="dueDiligencePct" label="Due diligence costs" value={dueDiligencePct} onChange={setDueDiligencePct} help="Third-party reports, inspections, and other diligence items." />
+                <PctSlider id="frictionPremiumPct" label="Deal friction premium" value={frictionPremiumPct} onChange={setFrictionPremiumPct} help="Slippage from negotiation, holdbacks, escrows, and execution risk." />
               </div>
-              <div className="flex items-center gap-3">
-                <Label>Currency symbol</Label>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <button type="button" aria-label="Info: Currency symbol" className="inline-flex">
-                      <Info className="w-4 h-4 text-muted-foreground" />
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-64 text-xs">
-                    Display only; no FX conversion is performed. For multi-currency analysis, run separate scenarios.
-                  </PopoverContent>
-                </Popover>
-                <Input className="w-24" value={ccy} maxLength={3} onChange={(e) => setCcy(e.target.value || "$")} />
-                <Button variant="ghost" size="sm" onClick={resetDefaults}>Reset</Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="rounded-2xl shadow-sm">
-          <CardContent className="p-6 space-y-5">
-            <h2 className="text-xl font-semibold text-[#5f58ff]">Traditional Exit Fees</h2>
-            <div className="grid gap-4">
-              <PctSlider id="brokerCommissionPct" label="Broker commission" value={brokerCommissionPct} onChange={setBrokerCommissionPct} help="Typical percentage paid to a business broker on sale proceeds." />
-              <PctSlider id="legalProfessionalPct" label="Legal & professional fees" value={legalProfessionalPct} onChange={setLegalProfessionalPct} help="External counsel and other professional costs tied to the sale." />
-              <PctSlider id="accountingTaxPct" label="Accounting & tax advisory" value={accountingTaxPct} onChange={setAccountingTaxPct} help="Preparation, quality-of-earnings, and tax structuring support." />
-              <PctSlider id="dueDiligencePct" label="Due diligence costs" value={dueDiligencePct} onChange={setDueDiligencePct} help="Third-party reports, inspections, and other diligence items." />
-              <PctSlider id="frictionPremiumPct" label="Deal friction premium" value={frictionPremiumPct} onChange={setFrictionPremiumPct} help="Slippage from negotiation, holdbacks, escrows, and execution risk." />
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
         
+          {/* Right: Capital Value Parameters */}
+          <Card className="rounded-2xl shadow-sm">
+            <CardContent className="p-6 space-y-5">
+              <h2 className="text-xl font-semibold text-[#5f58ff]">Capital Value Parameters</h2>
+              <div className="grid gap-4">
+                <PctSlider id="unlockPct" label="Accessible capital value" value={unlockPct} onChange={setUnlockPct} help="Portion of accessible capital value today while retaining ongoing income rights. Accessible capital value is capped at 70%." />
+                <PctSlider id="discountPct" label="Participation discount" value={discountPct} onChange={setDiscountPct} help="Conservative haircut for friction and risk. Net unlock = gross unlock × (1 - discount)." />
+                <div className="grid grid-cols-2 gap-4">
+                  <NumberField id="unitsMulti" label="Multi-unit operator: units" value={unitsMulti} onChange={setUnitsMulti} step={1} help="How many locations a given operator owns. Used to scale per-unit values." />
+                  <NumberField id="unitsNetwork" label="Brand network: units" value={unitsNetwork} onChange={setUnitsNetwork} step={1} help="Total active locations in the brand. Used to estimate network-level unlock." />
+                </div>
+                <div className="flex items-center gap-3">
+                  <Label>Currency symbol</Label>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <button type="button" aria-label="Info: Currency symbol" className="inline-flex">
+                        <Info className="w-4 h-4 text-muted-foreground" />
+                      </button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-64 text-xs">
+                      Display only; no FX conversion is performed. For multi-currency analysis, run separate scenarios.
+                    </PopoverContent>
+                  </Popover>
+                  <Input className="w-24" value={ccy} maxLength={3} onChange={(e) => setCcy(e.target.value || "$")} />
+                  <Button onClick={resetDefaults}>Reset</Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+ 
         <Card className="rounded-2xl shadow-sm">
           <CardContent className="p-6 space-y-4">
             <h2 className="text-xl font-semibold text-[#5f58ff] tracking-tight">Per-Unit Snapshot</h2>
@@ -607,6 +647,10 @@ export default function Calculator() {
             {/* Equatize Capital Value Release */}
             <div className="rounded-xl border-2 border-[#5f58ff]/40 bg-[#5f58ff]/5 p-4 space-y-2 shadow-sm">
               <div className="font-semibold text-[#5f58ff]">Capital value unlocked (via Equatize)</div>
+              <div className="flex justify-between text-sm">
+                <span className="text-muted-foreground">EV / EBITDA multiple (Equatize)</span>
+                <span className="font-medium">{multiple.toFixed(2)}×</span>
+              </div>              
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">EV / unit</span>
                 <span className="font-medium">{currency(perUnit.enterpriseValue, ccy)}</span>
