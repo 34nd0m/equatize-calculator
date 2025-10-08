@@ -644,6 +644,8 @@ export default function Calculator() {
                 </div>
               </div>
             <p className="text-xs text-muted-foreground mt-2">*Illustrative only. Multiples vary by size, growth, unit stability, and region.</p>
+            <p className="text-xs text-muted-foreground mt-2">Traditional resale multiples reflect small private business transactions — illiquid, heavily owner-dependent, and subject to buyer risk premiums.
+            By contrast, the Equatize framework models standardized, data-driven assets with improved transparency, diversification, and potential liquidity. That generally supports a higher valuation multiple - closer to how portfolios or financial products trade, not mom-and-pop resales.</p>
           </CardContent>
         </Card>
       </div>
