@@ -643,17 +643,6 @@ export default function Calculator() {
                   {currency(perUnit.diffEquatizeVsTraditional, ccy)}
                 </div>
               </div>
-              <div className="mt-4">
-                <h4 className="text-sm font-semibold mb-2">Sector comps</h4>
-              <div className="text-xs grid gap-1">
-                {sectorPresets[sectorKey].comps.map((c, i) => (
-                  <div key={i} className="flex justify-between gap-3">
-                    <span className="text-muted-foreground">{c.source}</span>
-                    <span className="font-medium">{c.earningsMultipleRange}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
             <p className="text-xs text-muted-foreground mt-2">*Illustrative only. Multiples vary by size, growth, unit stability, and region.</p>
           </CardContent>
         </Card>
