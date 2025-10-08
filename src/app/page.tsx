@@ -711,7 +711,7 @@ export default function Calculator() {
                 <Tooltip formatter={(v: number) => currency(v as number, ccy)} />
                 <Legend />
                 <Bar
-                  dataKey="Capital Value"
+                  dataKey="Unlock"
                   fill="#5f58ff"
                   stroke="#433fff"
                   strokeWidth={1}
