@@ -652,7 +652,7 @@ export default function Calculator() {
           
             {/* Equatize Capital Value Release */}
             <div className="rounded-xl border-2 border-[#5f58ff]/40 bg-[#5f58ff]/5 p-4 space-y-2 shadow-sm">
-              <div className="font-semibold text-[#5f58ff]">Capital value unlocked (via Equatize)</div>
+              <div className="font-semibold text-[#5f58ff]">Capital value unlock (via Equatize)</div>
               <div className="flex justify-between text-sm">
                 <span className="text-muted-foreground">EV / EBITDA multiple</span>
                 <span className="font-medium">{multiple.toFixed(2)}×</span>
@@ -702,7 +702,7 @@ export default function Calculator() {
 
       <Card className="rounded-2xl shadow-sm">
         <CardContent className="p-6">
-          <h3 className="text-lg font-semibold mb-4 text-[#5f58ff]">Unlock comparison</h3>
+          <h3 className="text-lg font-semibold mb-4 text-[#5f58ff]">Capital value unlock comparables</h3>
           <div className="h-72">
             <ResponsiveContainer>
               <BarChart data={chartData} margin={{ left: 24, right: 12, top: 8, bottom: 8 }}>
@@ -711,7 +711,7 @@ export default function Calculator() {
                 <Tooltip formatter={(v: number) => currency(v as number, ccy)} />
                 <Legend />
                 <Bar
-                  dataKey="Unlock"
+                  dataKey="Capital Value"
                   fill="#5f58ff"
                   stroke="#433fff"
                   strokeWidth={1}
